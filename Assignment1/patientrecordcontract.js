@@ -79,13 +79,18 @@ class PatientRecordContract extends Contract {
         let precord = PatientRecord.createInstance(username,name,dob,gender,blood_type);
         //TASK 0
         // Add patient record by calling the method in the PRecordList
-        throw new Error()
+        try {
+            patientRecordList.addPRecord(precord);
+        } catch (error) {
+            throw new Error()
+        }
         return precord.toBuffer();
     }
 
     async getPatientByKey(ctx, username, name){
         let precordKey = PatientRecord.makeKey([username,name]);
         //TASK-1: Use a method from patientRecordList to read a record by key
+        await patientRecordList.getPRecord(precordKey);
         return JSON.stringify(precord)
     }
 
